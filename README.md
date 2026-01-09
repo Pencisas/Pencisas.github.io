@@ -1,209 +1,202 @@
-<!-- ================= FONT ================= -->
+<!-- ================= FONTS ================= -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+
+<!-- ================= LIBRARIES ================= -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <style>
 :root {
-  --bg: #0B0F14;
-  --panel: #121826;
-  --border: #1F2937;
-  --text: #9CA3AF;
-  --accent: #60A5FA;
+  --bg:#0B0F14;
+  --panel:#111827;
+  --border:#1F2937;
+  --text:#9CA3AF;
+  --accent:#38BDF8;
 }
 
-* {
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
+* { box-sizing:border-box; font-family:Inter,sans-serif; }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  margin: 0;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
 }
 
 section {
-  min-height: 100vh;
-  padding: 80px 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 40px;
-  border-bottom: 1px solid var(--border);
+  min-height:100vh;
+  padding:100px 10%;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
 }
 
-h1, h2 {
-  color: white;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+h1,h2 {
+  color:white;
+  font-weight:900;
+  letter-spacing:-0.04em;
 }
 
-p {
-  max-width: 700px;
-  line-height: 1.6;
+p { max-width:700px; }
+
+/* ===== ABOUT ===== */
+.about-glow {
+  position:absolute;
+  inset:-50%;
+  background:radial-gradient(circle, var(--accent), transparent 70%);
+  opacity:0.15;
+  filter:blur(120px);
 }
 
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
+/* ===== SWIPER ===== */
+.swiper {
+  width:100%;
+  padding:60px 0;
 }
 
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
+.swiper-slide {
+  background:var(--panel);
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  transform:scale(0.8);
 }
 
-/* ===== GALLERY ===== */
-.gallery {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 20px;
+.swiper-slide img {
+  width:100%;
+  display:block;
 }
 
-.gallery img {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  transition: transform 0.4s ease;
+/* HERO SLIDE */
+.swiper-slide.hero {
+  transform:scale(1);
+  box-shadow:0 0 60px rgba(56,189,248,.25);
 }
 
-.gallery img:hover {
-  transform: scale(1.05);
+/* ===== BUILD GRID ===== */
+.build-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
-/* ===== HERO IMAGE ===== */
-.hero {
-  grid-row: span 2;
+.build-grid img {
+  width:100%;
+  border-radius:14px;
+  opacity:0;
+  transform:scale(0.6);
 }
 
-/* ===== BUTTONS ===== */
-button {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ===== TOP BUTTON ===== */
-#topBtn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  display: none;
+/* ===== BLADE MASK ===== */
+.slash {
+  clip-path:polygon(0 50%,100% 50%,100% 52%,0 52%);
 }
 </style>
 
 <!-- ================= ABOUT ================= -->
-<section class="fade">
-  <h1>3D Modeler — Game-Ready Assets</h1>
+<section id="about">
+  <div class="about-glow"></div>
+  <h1>3D Modeler for Game Worlds</h1>
   <p>
-    I am a 3D modeler with several years of experience creating low-to-mid poly assets for Roblox games.
-    I specialize in optimized models textured in Blender and Substance Painter.
-    <br><br>
-    I've contributed to games such as <b>Mow ur Snow</b>, <b>Shatter Isles</b>, and more.
+    Specialized in low–mid poly Roblox assets.
+    Blender & Substance Painter workflow.
+    Contributor to Mow ur Snow, Shatter Isles, and more.
   </p>
 </section>
 
-<!-- ================= CUBED CHARACTERS ================= -->
-<section class="fade">
+<!-- ================= CUBED ================= -->
+<section id="cubed">
   <h2>▣ 3D Cubed Characters</h2>
-  <p>Stylized, readable, and optimized for gameplay.</p>
 
-  <div class="gallery">
-    <img class="hero" src="IMAGE_HERO_CUBE.png">
-    <img src="IMAGE_CUBE_1.png">
-    <img src="IMAGE_CUBE_2.png">
-    <img src="IMAGE_CUBE_3.png">
+  <div class="swiper cubedSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide hero"><img src="CUBE_HERO.png"></div>
+      <div class="swiper-slide"><img src="CUBE_1.png"></div>
+      <div class="swiper-slide"><img src="CUBE_2.png"></div>
+      <div class="swiper-slide"><img src="CUBE_3.png"></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= MOBS ================= -->
-<section class="fade">
+<section id="mobs">
   <h2>◈ Mob & Boss Designs</h2>
-  <p>Designed for combat readability and personality.</p>
-
-  <div class="gallery">
-    <img class="hero" src="IMAGE_HERO_MOB.png">
-    <img src="IMAGE_MOB_1.png">
-    <img src="IMAGE_MOB_2.png">
-    <img src="IMAGE_MOB_3.png">
-  </div>
+  <img id="mobHero" src="MOB_HERO.png" style="width:60%;border-radius:24px;">
 </section>
 
 <!-- ================= BUILDINGS ================= -->
-<section class="fade">
+<section id="buildings">
   <h2>▦ Building Assets</h2>
-  <p>Modular structures optimized for large worlds.</p>
-
-  <div class="gallery">
-    <img class="hero" src="IMAGE_HERO_BUILDING.png">
-    <img src="IMAGE_BUILD_1.png">
-    <img src="IMAGE_BUILD_2.png">
-    <img src="IMAGE_BUILD_3.png">
-  </div>
-</section>
-
-<!-- ================= MOTORCYCLES ================= -->
-<section class="fade">
-  <h2>▧ Motorcycles</h2>
-  <p>Stylized vehicles with clean topology.</p>
-
-  <div class="gallery">
-    <img class="hero" src="IMAGE_HERO_BIKE.png">
-    <img src="IMAGE_BIKE_1.png">
-    <img src="IMAGE_BIKE_2.png">
-    <img src="IMAGE_BIKE_3.png">
+  <div class="build-grid">
+    <img src="BUILD_1.png">
+    <img src="BUILD_2.png">
+    <img src="BUILD_3.png">
+    <img src="BUILD_4.png">
+    <img src="BUILD_5.png">
+    <img src="BUILD_6.png">
   </div>
 </section>
 
 <!-- ================= BLADES ================= -->
-<section class="fade">
-  <h2>⟁ Blades & Weapons</h2>
-  <p>Readable silhouettes for combat-focused games.</p>
-
-  <div class="gallery">
-    <img class="hero" src="IMAGE_HERO_BLADE.png">
-    <img src="IMAGE_BLADE_1.png">
-    <img src="IMAGE_BLADE_2.png">
-    <img src="IMAGE_BLADE_3.png">
-  </div>
+<section id="blades">
+  <h2>⟁ Blades</h2>
+  <img class="slash" src="BLADE_HERO.png" style="width:60%;">
 </section>
 
 <!-- ================= CONTACT ================= -->
-<section class="fade">
+<section id="contact">
   <h2>Get In Touch</h2>
-  <p>Open for commissions and collaborations.</p>
-
-  <button onclick="navigator.clipboard.writeText('your@email.com')">
-    Copy Email
-  </button>
+  <button onclick="navigator.clipboard.writeText('your@email.com')">Copy Email</button>
 </section>
 
-<button id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-  ↑ Top
-</button>
-
 <script>
-const sections = document.querySelectorAll('.fade');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('show');
-  });
-}, { threshold: 0.2 });
+gsap.registerPlugin(ScrollTrigger);
 
-sections.forEach(sec => observer.observe(sec));
+/* ABOUT */
+gsap.from("#about h1", {
+  y:100, opacity:0, duration:1.5
+});
 
-window.addEventListener('scroll', () => {
-  document.getElementById('topBtn').style.display =
-    window.scrollY > 500 ? 'block' : 'none';
+/* CUBED CAROUSEL */
+new Swiper(".cubedSwiper", {
+  slidesPerView:3,
+  centeredSlides:true,
+  loop:true
+});
+
+/* MOB DRAMATIC ZOOM */
+gsap.from("#mobHero", {
+  scale:0.3,
+  opacity:0,
+  rotate:-10,
+  scrollTrigger:{
+    trigger:"#mobs",
+    start:"top 70%"
+  }
+});
+
+/* BUILD ASSEMBLY */
+gsap.to(".build-grid img", {
+  opacity:1,
+  scale:1,
+  stagger:0.15,
+  scrollTrigger:{
+    trigger:"#buildings",
+    start:"top 70%"
+  }
+});
+
+/* BLADE SLASH */
+gsap.to(".slash", {
+  clipPath:"polygon(0 0,100% 0,100% 100%,0 100%)",
+  duration:1,
+  scrollTrigger:{
+    trigger:"#blades",
+    start:"top 75%"
+  }
 });
 </script>

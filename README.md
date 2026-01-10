@@ -46,52 +46,80 @@ p { max-width:700px; }
 /* ===== ABOUT ===== */
 .about-glow {
   position:absolute;
-  inset:-50%;
+  inset:-40%;
   background:radial-gradient(circle, var(--accent), transparent 70%);
-  opacity:0.15;
-  filter:blur(120px);
+  opacity:0.12;
+  filter:blur(140px);
+  animation: slowFloat 20s infinite alternate;
+}
+
+@keyframes slowFloat {
+  from { transform:translateY(-40px); }
+  to { transform:translateY(40px); }
+}
+
+/* ===== IMAGE FRAME (UNIVERSAL) ===== */
+.frame {
+  aspect-ratio:16/10;
+  background:linear-gradient(180deg,#0f172a,#020617);
+  border-radius:20px;
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.frame img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:18px;
 }
 
 /* ===== SWIPER ===== */
 .swiper {
   width:100%;
-  padding:60px 0;
+  padding:80px 0;
 }
 
 .swiper-slide {
-  background:var(--panel);
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid var(--border);
   transform:scale(0.8);
+  transition:transform .4s ease;
 }
 
-.swiper-slide img {
-  width:100%;
-  display:block;
-}
-
-/* HERO SLIDE */
-.swiper-slide.hero {
+.swiper-slide-active {
   transform:scale(1);
-  box-shadow:0 0 60px rgba(56,189,248,.25);
+}
+
+/* HERO GLOW */
+.hero .frame {
+  box-shadow:0 0 80px rgba(56,189,248,.3);
 }
 
 /* ===== BUILD GRID ===== */
 .build-grid {
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
 }
 
-.build-grid img {
-  width:100%;
-  border-radius:14px;
+.build-grid .frame {
   opacity:0;
-  transform:scale(0.6);
+  transform:translateY(40px) scale(.85);
 }
 
-/* ===== BLADE MASK ===== */
+/* ===== FLOATING MOTION ===== */
+.float {
+  animation: floatIdle 6s ease-in-out infinite;
+}
+
+@keyframes floatIdle {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-14px); }
+}
+
+/* ===== BLADE SLASH ===== */
 .slash {
   clip-path:polygon(0 50%,100% 50%,100% 52%,0 52%);
 }
@@ -114,61 +142,67 @@ p { max-width:700px; }
 
   <div class="swiper cubedSwiper">
     <div class="swiper-wrapper">
+
       <div class="swiper-slide hero">
-        <img src="images/cubed/SJW.jpg" alt="Cubed Character Hero">
+        <div class="frame float">
+          <img src="images/cubed/SJW.jpg">
+        </div>
       </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Akaza.jpg" alt="Akaza">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Gyokko.jpg" alt="Gyokko">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Gyomei.jpg" alt="Gyomei">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Kokushibo.jpg" alt="Kokushibo">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Nezuko.jpg" alt="Nezuko">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Glacgon.png" alt="Glacgon">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/Wolves.png" alt="Wolves">
-      </div>
-      <div class="swiper-slide">
-        <img src="images/cubed/krakenfinish.png" alt="Kraken">
-      </div>
+
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Akaza.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyokko.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyomei.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Kokushibo.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Nezuko.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Glacgon.png"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Wolves.png"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/cubed/krakenfinish.png"></div></div>
+
     </div>
   </div>
 </section>
 
-
 <!-- ================= MOBS ================= -->
 <section id="mobs">
   <h2>◈ Mob & Boss Designs</h2>
-  <img id="mobHero" src="MOB_HERO.png" style="width:60%;border-radius:24px;">
+
+  <div class="frame float" style="max-width:700px">
+    <img id="mobHero" src="images/mobs/Muzan.jpg">
+  </div>
 </section>
 
 <!-- ================= BUILDINGS ================= -->
 <section id="buildings">
   <h2>▦ Building Assets</h2>
+
   <div class="build-grid">
-    <img src="BUILD_1.png">
-    <img src="BUILD_2.png">
-    <img src="BUILD_3.png">
-    <img src="BUILD_4.png">
-    <img src="BUILD_5.png">
-    <img src="BUILD_6.png">
+    <div class="frame"><img src="images/buildings/narutorend.jpg"></div>
+    <div class="frame"><img src="images/buildings/narutobldgs.jpg"></div>
+    <div class="frame"><img src="images/buildings/Solo Leveling Buildings.png"></div>
+  </div>
+</section>
+
+<!-- ================= BIKES ================= -->
+<section id="bikes">
+  <h2>▧ Motorcycles</h2>
+
+  <div class="swiper bikeSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide hero"><div class="frame float"><img src="images/bikes/enduro.webp"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwblack.png"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwred.png"></div></div>
+      <div class="swiper-slide"><div class="frame"><img src="images/bikes/gsxblue.png"></div></div>
+    </div>
   </div>
 </section>
 
 <!-- ================= BLADES ================= -->
 <section id="blades">
   <h2>⟁ Blades</h2>
-  <img class="slash" src="BLADE_HERO.png" style="width:60%;">
+
+  <div class="frame slash" style="max-width:700px">
+    <img src="images/blades/Dagger.webp">
+  </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
@@ -181,46 +215,33 @@ p { max-width:700px; }
 gsap.registerPlugin(ScrollTrigger);
 
 /* ABOUT */
-gsap.from("#about h1", {
-  y:100, opacity:0, duration:1.5
-});
+gsap.from("#about h1", { y:120, opacity:0, duration:1.5 });
 
-/* CUBED CAROUSEL */
-new Swiper(".cubedSwiper", {
-  slidesPerView:3,
-  centeredSlides:true,
-  loop:true
-});
+/* SWIPERS */
+new Swiper(".cubedSwiper", { slidesPerView:3, centeredSlides:true, loop:true });
+new Swiper(".bikeSwiper", { slidesPerView:2, centeredSlides:true, loop:true });
 
-/* MOB DRAMATIC ZOOM */
+/* MOB */
 gsap.from("#mobHero", {
-  scale:0.3,
+  scale:.4,
+  rotate:-8,
   opacity:0,
-  rotate:-10,
-  scrollTrigger:{
-    trigger:"#mobs",
-    start:"top 70%"
-  }
+  scrollTrigger:{ trigger:"#mobs", start:"top 70%" }
 });
 
-/* BUILD ASSEMBLY */
-gsap.to(".build-grid img", {
+/* BUILDINGS */
+gsap.to(".build-grid .frame", {
   opacity:1,
+  y:0,
   scale:1,
-  stagger:0.15,
-  scrollTrigger:{
-    trigger:"#buildings",
-    start:"top 70%"
-  }
+  stagger:.2,
+  scrollTrigger:{ trigger:"#buildings", start:"top 70%" }
 });
 
 /* BLADE SLASH */
 gsap.to(".slash", {
   clipPath:"polygon(0 0,100% 0,100% 100%,0 100%)",
   duration:1,
-  scrollTrigger:{
-    trigger:"#blades",
-    start:"top 75%"
-  }
+  scrollTrigger:{ trigger:"#blades", start:"top 75%" }
 });
 </script>

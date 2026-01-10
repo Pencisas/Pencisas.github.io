@@ -5,30 +5,31 @@
 <title>Pencisas — 3D Game Artist</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FONTS -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
-<!-- LIBRARIES -->
+<!-- Libraries -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<!-- STYLES -->
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
+<div id="light"></div>
+
 <section id="about">
-  <div class="ambient-glow"></div>
+  <div class="ambient"></div>
   <h1>3D Modeler for Game Worlds</h1>
   <p>
     Low–mid poly Roblox specialist.<br>
-    Blender & Substance Painter pipeline.<br>
-    Games: Mow ur Snow, Shatter Isles.
+    Blender & Substance Painter workflow.<br>
+    Credits: Mow ur Snow, Shatter Isles.
   </p>
 </section>
 
@@ -36,37 +37,35 @@
   <h2>▣ 3D Cubed Characters</h2>
   <div class="swiper cubedSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><div class="frame"><img src="images/cubed/SJW.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Akaza.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyokko.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyomei.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Kokushibo.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Nezuko.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Glacgon.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Wolves.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/krakenfinish.png"></div></div>
+      <div class="swiper-slide hero"><div class="frame zoom"><img src="images/cubed/SJW.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Akaza.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Gyokko.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Gyomei.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Kokushibo.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Nezuko.jpg"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Glacgon.png"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/Wolves.png"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/cubed/krakenfinish.png"></div></div>
     </div>
   </div>
 </section>
 
 <section id="mobs">
   <h2>◈ Mob & Boss Designs</h2>
-  <div class="mob-hero frame">
-    <img src="images/mobs/ElyenRender.png">
-  </div>
-  <div class="mob-grid">
-    <div class="frame"><img src="images/mobs/Ants.jpg"></div>
-    <div class="frame"><img src="images/mobs/Gedo.jpg"></div>
-    <div class="frame"><img src="images/mobs/Muzan.jpg"></div>
+  <div class="frame hero-frame zoom"><img src="images/mobs/ElyenRender.png"></div>
+  <div class="grid">
+    <div class="frame zoom"><img src="images/mobs/Ants.jpg"></div>
+    <div class="frame zoom"><img src="images/mobs/Gedo.jpg"></div>
+    <div class="frame zoom"><img src="images/mobs/Muzan.jpg"></div>
   </div>
 </section>
 
 <section id="buildings">
   <h2>▦ Building Assets</h2>
-  <div class="build-grid">
-    <div class="frame"><img src="images/buildings/narutorend.jpg"></div>
-    <div class="frame"><img src="images/buildings/narutobldgs.jpg"></div>
-    <div class="frame"><img src="images/buildings/Solo Leveling Buildings.png"></div>
+  <div class="grid">
+    <div class="frame zoom"><img src="images/buildings/narutorend.jpg"></div>
+    <div class="frame zoom"><img src="images/buildings/narutobldgs.jpg"></div>
+    <div class="frame zoom"><img src="images/buildings/Solo Leveling Buildings.png"></div>
   </div>
 </section>
 
@@ -74,30 +73,32 @@
   <h2>▧ Motorcycles</h2>
   <div class="swiper bikeSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><div class="frame"><img src="images/bikes/gsxblue.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwblack.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwred.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/bikes/enduro.webp"></div></div>
+      <div class="swiper-slide hero"><div class="frame zoom"><img src="images/bikes/gsxblue.png"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/bikes/bmwblack.png"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/bikes/bmwred.png"></div></div>
+      <div class="swiper-slide"><div class="frame zoom"><img src="images/bikes/enduro.webp"></div></div>
     </div>
   </div>
 </section>
 
 <section id="blades">
   <h2>⟁ Blades</h2>
-  <div class="blade-grid">
-    <div class="frame"><img src="images/blades/Dagger.webp"></div>
-    <div class="frame"><img src="images/blades/crescentrender.png"></div>
-    <div class="frame"><img src="images/blades/renderprep.png"></div>
-    <div class="frame"><img src="images/blades/tridentrender.png"></div>
+  <div class="grid blades">
+    <div class="frame zoom"><img src="images/blades/Dagger.webp"></div>
+    <div class="frame zoom"><img src="images/blades/crescentrender.png"></div>
+    <div class="frame zoom"><img src="images/blades/renderprep.png"></div>
+    <div class="frame zoom"><img src="images/blades/tridentrender.png"></div>
   </div>
 </section>
 
 <section id="contact">
   <h2>Get In Touch</h2>
-  <button onclick="navigator.clipboard.writeText('your@email.com')">
-    Copy Email
-  </button>
+  <button onclick="navigator.clipboard.writeText('your@email.com')">Copy Email</button>
 </section>
+
+<div id="viewer">
+  <img id="viewerImg">
+</div>
 
 <script src="js/motion.js"></script>
 </body>

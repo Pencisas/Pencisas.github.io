@@ -5,122 +5,420 @@
 <title>Pencisas — 3D Game Artist</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fonts -->
+<!-- ================= FONTS ================= -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
-<!-- Libraries -->
+<!-- ================= LIBRARIES ================= -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<link rel="stylesheet" href="css/style.css">
+<style>
+/* =========================================================
+   ROOT / RESET
+========================================================= */
+:root{
+  --bg:#0b0f14;
+  --panel:#0f172a;
+  --border:#020617;
+  --text:#9ca3af;
+  --white:#ffffff;
+  --accent:#38bdf8;
+  --accent-2:#6366f1;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* =========================================================
+   BACKGROUND MOTION (SUBTLE)
+========================================================= */
+#bg-motion{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 25%,rgba(56,189,248,.08),transparent 40%),
+    radial-gradient(circle at 85% 70%,rgba(99,102,241,.06),transparent 45%);
+  animation:bgDrift 32s ease-in-out infinite alternate;
+  z-index:-3;
+}
+
+@keyframes bgDrift{
+  from{transform:translateY(0)}
+  to{transform:translateY(-90px)}
+}
+
+/* film grain */
+#grain{
+  position:fixed;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.04;
+  pointer-events:none;
+  z-index:-2;
+}
+
+/* =========================================================
+   CURSOR LIGHT
+========================================================= */
+#cursor-light{
+  position:fixed;
+  width:280px;
+  height:280px;
+  background:radial-gradient(circle,rgba(56,189,248,.18),transparent 70%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  transform:translate(-50%,-50%);
+  z-index:20;
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+section{
+  padding:120px 10%;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+
+section.cinematic{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:40px;
+}
+
+h1,h2{
+  color:var(--white);
+  font-weight:900;
+  letter-spacing:-.04em;
+}
+
+p{
+  max-width:720px;
+  line-height:1.7;
+}
+
+/* =========================================================
+   HINTS
+========================================================= */
+.hint{
+  font-size:.8rem;
+  opacity:.6;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.hint::after{
+  content:"→";
+  animation:hintMove 1.6s infinite;
+}
+
+@keyframes hintMove{
+  0%{transform:translateX(0)}
+  50%{transform:translateX(8px)}
+  100%{transform:translateX(0)}
+}
+
+/* =========================================================
+   FRAME (UNIVERSAL)
+========================================================= */
+.frame{
+  background:linear-gradient(180deg,#0f172a,#020617);
+  border-radius:22px;
+  border:1px solid #000;
+  overflow:hidden;
+  transition:transform .6s ease, box-shadow .6s ease;
+  position:relative;
+}
+
+.frame img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:26px;
+}
+
+.frame:hover{
+  transform:translateY(-6px);
+  box-shadow:0 40px 100px rgba(0,0,0,.7);
+}
+
+/* =========================================================
+   HERO FRAMES
+========================================================= */
+.hero-frame{
+  max-width:920px;
+  margin:30px 0 70px;
+}
+
+.blade-hero{
+  box-shadow:
+    0 0 120px rgba(56,189,248,.35),
+    inset 0 0 40px rgba(56,189,248,.2);
+}
+
+/* =========================================================
+   GRIDS
+========================================================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:32px;
+}
+
+/* =========================================================
+   SWIPERS
+========================================================= */
+.swiper{
+  padding:90px 0;
+}
+
+.swiper-slide{
+  transform:scale(.85);
+  transition:.5s;
+}
+
+.swiper-slide-active{
+  transform:scale(1);
+}
+
+/* =========================================================
+   BEFORE / AFTER SLIDER
+========================================================= */
+.compare{
+  position:relative;
+  border-radius:22px;
+  overflow:hidden;
+}
+
+.compare img{
+  width:100%;
+  display:block;
+}
+
+.compare .after{
+  position:absolute;
+  inset:0;
+  clip-path:inset(0 50% 0 0);
+}
+
+.compare input{
+  position:absolute;
+  inset:0;
+  appearance:none;
+  background:none;
+  cursor:ew-resize;
+}
+
+.compare input::-webkit-slider-thumb{
+  appearance:none;
+  width:4px;
+  height:100%;
+  background:var(--accent);
+}
+
+/* =========================================================
+   COLOR GRADING PER SECTION
+========================================================= */
+#cubed{ filter:hue-rotate(0deg); }
+#mobs{ filter:hue-rotate(-10deg); }
+#buildings{ filter:hue-rotate(12deg); }
+#bikes{ filter:hue-rotate(-18deg); }
+#blades{ filter:hue-rotate(20deg); }
+
+/* =========================================================
+   CONTACT
+========================================================= */
+button{
+  background:var(--accent);
+  border:none;
+  padding:14px 34px;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+@media(max-width:768px){
+  section{padding:90px 7%}
+  .swiper-slide{transform:scale(.95)}
+}
+</style>
 </head>
 
 <body>
 
-<!-- Subtle animated background -->
-<div id="bg-noise"></div>
+<div id="bg-motion"></div>
+<div id="grain"></div>
 <div id="cursor-light"></div>
 
+<!-- ================= ABOUT (SCROLL LOCKED CINEMATIC) ================= -->
 <section id="about" class="cinematic">
-  <div class="ambient"></div>
   <h1>3D Modeler for Game Worlds</h1>
   <p>
-    Low–mid poly Roblox assets.<br>
-    Blender & Substance Painter workflow.<br>
-    Environment, characters, weapons.
+    I create stylized low–mid poly assets for immersive game worlds.<br>
+    Characters, bosses, weapons, vehicles & environments.
   </p>
 </section>
 
+<!-- ================= CUBED ================= -->
 <section id="cubed">
-  <header>
-    <h2>▣ 3D Cubed Characters</h2>
-    <span class="hint">Drag / Scroll →</span>
-  </header>
+<header>
+  <h2>▣ 3D Cubed Characters</h2>
+  <span class="hint">Drag / Scroll</span>
+</header>
 
-  <div class="swiper cubedSwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><div class="frame"><img src="images/cubed/SJW.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Akaza.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyokko.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyomei.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Kokushibo.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Nezuko.jpg"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Glacgon.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/Wolves.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/cubed/krakenfinish.png"></div></div>
-    </div>
+<div class="swiper cubedSwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide hero"><div class="frame"><img loading="eager" src="images/cubed/SJW.jpg"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Akaza.jpg"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Gyokko.jpg"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Gyomei.jpg"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Kokushibo.jpg"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Nezuko.jpg"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Glacgon.png"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/Wolves.png"></div></div>
+    <div class="swiper-slide"><div class="frame"><img loading="lazy" src="images/cubed/krakenfinish.png"></div></div>
   </div>
+</div>
 </section>
 
+<!-- ================= MOBS ================= -->
 <section id="mobs">
-  <header>
-    <h2>◈ Mob & Boss Designs</h2>
-    <span class="hint">Hover to inspect</span>
-  </header>
+<header>
+  <h2>◈ Mob & Boss Designs</h2>
+  <span class="hint">Hover</span>
+</header>
 
-  <div class="frame hero-frame"><img src="images/mobs/Gedo.jpg"></div>
+<div class="frame hero-frame"><img src="images/mobs/Gedo.jpg"></div>
 
-  <div class="grid">
-    <div class="frame"><img src="images/mobs/ElyenRender.png"></div>
-    <div class="frame"><img src="images/mobs/Ants.jpg"></div>
-    <div class="frame"><img src="images/mobs/Muzan.jpg"></div>
-  </div>
+<div class="grid">
+  <div class="frame"><img src="images/mobs/ElyenRender.png"></div>
+  <div class="frame"><img src="images/mobs/Ants.jpg"></div>
+  <div class="frame"><img src="images/mobs/Muzan.jpg"></div>
+</div>
 </section>
 
+<!-- ================= BUILDINGS (BEFORE / AFTER) ================= -->
 <section id="buildings">
-  <header>
-    <h2>▦ Building Assets</h2>
-  </header>
+<header>
+  <h2>▦ Building Assets</h2>
+  <span class="hint">Slide</span>
+</header>
 
-  <div class="grid">
-    <div class="frame"><img src="images/buildings/narutorend.jpg"></div>
-    <div class="frame"><img src="images/buildings/narutobldgs.jpg"></div>
-    <div class="frame"><img src="images/buildings/Solo Leveling Buildings.png"></div>
-  </div>
+<div class="compare">
+  <img src="images/buildings/narutorend.jpg">
+  <img class="after" src="images/buildings/narutobldgs.jpg">
+  <input type="range" min="0" max="100" value="50">
+</div>
+
+<div class="grid" style="margin-top:50px">
+  <div class="frame"><img src="images/buildings/Solo Leveling Buildings.png"></div>
+</div>
 </section>
 
+<!-- ================= BIKES ================= -->
 <section id="bikes">
-  <header>
-    <h2>▧ Motorcycles</h2>
-    <span class="hint">Swipe →</span>
-  </header>
+<header>
+  <h2>▧ Motorcycles</h2>
+  <span class="hint">Swipe</span>
+</header>
 
-  <div class="swiper bikeSwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><div class="frame"><img src="images/bikes/gsxblue.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwblack.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwred.png"></div></div>
-      <div class="swiper-slide"><div class="frame"><img src="images/bikes/enduro.webp"></div></div>
-    </div>
+<div class="swiper bikeSwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide hero"><div class="frame"><img src="images/bikes/gsxblue.png"></div></div>
+    <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwblack.png"></div></div>
+    <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwred.png"></div></div>
+    <div class="swiper-slide"><div class="frame"><img src="images/bikes/enduro.webp"></div></div>
   </div>
+</div>
 </section>
 
+<!-- ================= BLADES ================= -->
 <section id="blades" class="cinematic">
-  <header>
-    <h2>⟁ Blades</h2>
-    <span class="hint">Scroll</span>
-  </header>
+<header>
+  <h2>⟁ Blades</h2>
+  <span class="hint">Scroll</span>
+</header>
 
-  <div class="frame hero-frame blade-hero">
-    <img src="images/blades/Dagger.webp">
-  </div>
+<div class="frame hero-frame blade-hero">
+  <img src="images/blades/Dagger.webp">
+</div>
 
-  <div class="grid blades">
-    <div class="frame"><img src="images/blades/crescentrender.png"></div>
-    <div class="frame"><img src="images/blades/renderprep.png"></div>
-    <div class="frame"><img src="images/blades/tridentrender.png"></div>
-  </div>
+<div class="grid">
+  <div class="frame"><img src="images/blades/crescentrender.png"></div>
+  <div class="frame"><img src="images/blades/renderprep.png"></div>
+  <div class="frame"><img src="images/blades/tridentrender.png"></div>
+</div>
 </section>
 
+<!-- ================= CONTACT ================= -->
 <section id="contact">
-  <h2>Get In Touch</h2>
-  <button onclick="navigator.clipboard.writeText('your@email.com')">Copy Email</button>
+<h2>Get In Touch</h2>
+<button onclick="navigator.clipboard.writeText('your@email.com')">Copy Email</button>
 </section>
 
-<script src="js/motion.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* cursor light */
+document.addEventListener("mousemove",e=>{
+  gsap.to("#cursor-light",{x:e.clientX,y:e.clientY,duration:.25});
+});
+
+/* scroll lock about */
+ScrollTrigger.create({
+  trigger:"#about",
+  start:"top top",
+  end:"+=120%",
+  pin:true,
+  scrub:true
+});
+
+/* swipers */
+new Swiper(".cubedSwiper",{slidesPerView:3,centeredSlides:true,loop:true});
+new Swiper(".bikeSwiper",{slidesPerView:2,centeredSlides:true,loop:true});
+
+/* before after */
+document.querySelectorAll(".compare").forEach(c=>{
+  const slider=c.querySelector("input");
+  const after=c.querySelector(".after");
+  slider.addEventListener("input",()=>{
+    after.style.clipPath=`inset(0 ${100-slider.value}% 0 0)`;
+  });
+});
+
+/* cinematic pans */
+gsap.utils.toArray(".hero-frame").forEach(frame=>{
+  gsap.fromTo(frame,{scale:1.05},{scale:1,scrollTrigger:{
+    trigger:frame,start:"top 80%",scrub:true
+  }});
+});
+</script>
+
 </body>
 </html>

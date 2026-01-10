@@ -114,44 +114,33 @@ p { max-width:700px; }
 
   <div class="swiper cubedSwiper">
     <div class="swiper-wrapper">
-
-      <!-- HERO IMAGE -->
       <div class="swiper-slide hero">
         <img src="images/cubed/SJW.jpg" alt="Cubed Character Hero">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Akaza.jpg" alt="Akaza">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Gyokko.jpg" alt="Gyokko">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Gyomei.jpg" alt="Gyomei">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Kokushibo.jpg" alt="Kokushibo">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Nezuko.jpg" alt="Nezuko">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Glacgon.png" alt="Glacgon">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/Wolves.png" alt="Wolves">
       </div>
-
       <div class="swiper-slide">
         <img src="images/cubed/krakenfinish.png" alt="Kraken">
       </div>
-
     </div>
   </div>
 </section>

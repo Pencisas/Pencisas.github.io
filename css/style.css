@@ -1,111 +1,252 @@
+/* =========================================================
+   RESET & ROOT
+========================================================= */
+
 :root{
   --bg:#0b0f14;
-  --panel:#0f172a;
+  --bg-soft:#0f172a;
+  --panel:#0b1220;
   --border:#020617;
   --text:#9ca3af;
+  --white:#ffffff;
+
   --accent:#38bdf8;
+  --accent-2:#6366f1;
+  --accent-3:#22d3ee;
+
+  --glow-soft:0 0 60px rgba(56,189,248,.25);
+  --glow-strong:0 0 140px rgba(56,189,248,.4);
 }
 
-*{box-sizing:border-box;font-family:Inter,sans-serif}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-  margin:0;
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* moving background */
-#bg-noise{
+/* =========================================================
+   BACKGROUND MOTION LAYERS
+========================================================= */
+
+#bg-motion{
   position:fixed;
   inset:0;
+  z-index:-4;
   background:
-    radial-gradient(circle at 20% 30%,rgba(56,189,248,.08),transparent 40%),
-    radial-gradient(circle at 80% 70%,rgba(99,102,241,.06),transparent 45%);
-  animation:bgFloat 30s linear infinite alternate;
-  z-index:-2;
+    radial-gradient(circle at 20% 25%,rgba(56,189,248,.08),transparent 45%),
+    radial-gradient(circle at 80% 70%,rgba(99,102,241,.06),transparent 50%);
+  animation:bgDrift 36s ease-in-out infinite alternate;
 }
 
-@keyframes bgFloat{
+@keyframes bgDrift{
   from{transform:translateY(0)}
-  to{transform:translateY(-80px)}
+  to{transform:translateY(-120px)}
 }
 
-/* cursor glow */
+#grain{
+  position:fixed;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.035;
+  z-index:-3;
+  pointer-events:none;
+}
+
+/* =========================================================
+   CURSOR LIGHT (JS DRIVEN)
+========================================================= */
+
 #cursor-light{
   position:fixed;
-  width:260px;
-  height:260px;
-  pointer-events:none;
-  background:radial-gradient(circle,rgba(56,189,248,.2),transparent 70%);
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(56,189,248,.18),transparent 70%);
   mix-blend-mode:screen;
+  pointer-events:none;
   transform:translate(-50%,-50%);
-  z-index:10;
+  z-index:30;
+  will-change:transform;
 }
+
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 section{
+  position:relative;
   padding:120px 10%;
   border-bottom:1px solid var(--border);
-  position:relative;
+  overflow:hidden;
 }
 
-.cinematic{
+section.cinematic{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
 
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
 h1,h2{
-  color:white;
+  color:var(--white);
   font-weight:900;
+  letter-spacing:-.04em;
 }
+
+h1{
+  font-size:clamp(2.8rem,5vw,4.6rem);
+  line-height:1.05;
+}
+
+h2{
+  font-size:clamp(2rem,3.4vw,3.2rem);
+}
+
+p{
+  max-width:760px;
+  line-height:1.75;
+  margin-top:16px;
+  font-size:1rem;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
 header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  margin-bottom:40px;
 }
+
+/* =========================================================
+   VISUAL HINTS
+========================================================= */
 
 .hint{
-  font-size:.85rem;
-  opacity:.6;
+  font-size:.8rem;
+  opacity:.55;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
 }
+
+.hint::after{
+  content:"→";
+  animation:hintMove 1.6s ease-in-out infinite;
+}
+
+@keyframes hintMove{
+  0%{transform:translateX(0)}
+  50%{transform:translateX(8px)}
+  100%{transform:translateX(0)}
+}
+
+/* =========================================================
+   IMAGE FRAME (UNIVERSAL)
+========================================================= */
 
 .frame{
-  background:linear-gradient(180deg,#0f172a,#020617);
-  border-radius:22px;
+  position:relative;
+  background:
+    linear-gradient(180deg,#0f172a,#020617);
+  border-radius:24px;
   border:1px solid #000;
   overflow:hidden;
-  transition:transform .6s, box-shadow .6s;
+  transition:
+    transform .6s ease,
+    box-shadow .6s ease,
+    filter .6s ease;
+  will-change:transform;
 }
 
-.frame:hover{
-  transform:translateY(-6px);
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+.frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,.06),
+    transparent 70%
+  );
+  opacity:0;
+  transition:.6s;
+}
+
+.frame:hover::after{
+  opacity:1;
 }
 
 .frame img{
   width:100%;
   height:100%;
   object-fit:contain;
-  padding:24px;
+  padding:28px;
+  image-rendering:auto;
 }
+
+.frame:hover{
+  transform:translateY(-8px) scale(1.01);
+  box-shadow:0 40px 120px rgba(0,0,0,.8);
+}
+
+/* =========================================================
+   HERO FRAMES
+========================================================= */
 
 .hero-frame{
-  max-width:900px;
-  margin:40px 0 70px;
+  max-width:960px;
+  margin:30px 0 70px;
 }
 
-.blade-hero{
-  box-shadow:0 0 120px rgba(56,189,248,.35);
+.hero-frame img{
+  padding:36px;
 }
+
+.hero .frame{
+  box-shadow:var(--glow-soft);
+}
+
+/* Blades hero */
+.blade-hero{
+  box-shadow:
+    var(--glow-strong),
+    inset 0 0 50px rgba(56,189,248,.25);
+}
+
+/* =========================================================
+   GRIDS
+========================================================= */
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
+  gap:32px;
 }
+
+/* =========================================================
+   SWIPER
+========================================================= */
 
 .swiper{
   padding:90px 0;
@@ -120,17 +261,129 @@ header{
   transform:scale(1);
 }
 
-button{
-  background:var(--accent);
-  border:none;
-  padding:14px 32px;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
+.swiper-slide .frame{
+  height:100%;
 }
 
-/* mobile optimization */
-@media(max-width:768px){
+/* =========================================================
+   BEFORE / AFTER SLIDER
+========================================================= */
+
+.compare{
+  position:relative;
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 60px 160px rgba(0,0,0,.7);
+}
+
+.compare img{
+  width:100%;
+  display:block;
+}
+
+.compare .after{
+  position:absolute;
+  inset:0;
+  clip-path:inset(0 50% 0 0);
+  transition:clip-path .2s ease;
+}
+
+.compare input{
+  position:absolute;
+  inset:0;
+  appearance:none;
+  background:none;
+  cursor:ew-resize;
+}
+
+.compare input::-webkit-slider-thumb{
+  appearance:none;
+  width:4px;
+  height:100%;
+  background:var(--accent);
+}
+
+/* =========================================================
+   COLOR GRADING PER SECTION
+========================================================= */
+
+#cubed{
+  filter:hue-rotate(0deg);
+}
+
+#mobs{
+  filter:hue-rotate(-10deg) saturate(1.05);
+}
+
+#buildings{
+  filter:hue-rotate(12deg) contrast(1.05);
+}
+
+#bikes{
+  filter:hue-rotate(-18deg) saturate(1.15);
+}
+
+#blades{
+  filter:hue-rotate(20deg) contrast(1.1);
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+button{
+  margin-top:28px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  border:none;
+  padding:16px 36px;
+  border-radius:999px;
+  color:#000;
+  font-weight:900;
+  cursor:pointer;
+  transition:.4s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 20px 50px rgba(56,189,248,.5);
+}
+
+/* =========================================================
+   MOBILE OPTIMIZATION
+========================================================= */
+
+@media(max-width:900px){
   section{padding:90px 7%}
   .swiper-slide{transform:scale(.95)}
+  header{flex-direction:column;align-items:flex-start;gap:12px}
+}
+
+@media(max-width:600px){
+  h1{font-size:2.4rem}
+  h2{font-size:1.9rem}
+  .frame img{padding:20px}
+}
+
+/* =========================================================
+   FUTURE EXTENSIONS (JS WILL HOOK INTO THESE)
+========================================================= */
+
+/* sound-reactive hover */
+.sound-reactive{
+  transition:filter .2s, transform .2s;
+}
+
+/* shader-like glow pulse */
+.shader-pulse{
+  animation:pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.2)}
+}
+
+/* cinematic depth */
+.depth{
+  transform-style:preserve-3d;
 }

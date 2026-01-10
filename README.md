@@ -13,8 +13,8 @@
 <style>
 :root {
   --bg:#0B0F14;
-  --panel:#111827;
-  --border:#1F2937;
+  --panel:#020617;
+  --border:#000000;
   --text:#9CA3AF;
   --accent:#38BDF8;
 }
@@ -27,12 +27,13 @@ body {
   color:var(--text);
 }
 
+/* ===== SECTIONS ===== */
 section {
   min-height:100vh;
-  padding:100px 10%;
+  padding:110px 10%;
   position:relative;
   overflow:hidden;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #020617;
 }
 
 h1,h2 {
@@ -41,87 +42,109 @@ h1,h2 {
   letter-spacing:-0.04em;
 }
 
-p { max-width:700px; }
+p {
+  max-width:720px;
+  line-height:1.6;
+}
 
 /* ===== ABOUT ===== */
 .about-glow {
   position:absolute;
-  inset:-40%;
-  background:radial-gradient(circle, var(--accent), transparent 70%);
-  opacity:0.12;
-  filter:blur(140px);
-  animation: slowFloat 20s infinite alternate;
+  inset:-50%;
+  background:radial-gradient(circle, var(--accent), transparent 65%);
+  opacity:.10;
+  filter:blur(160px);
+  animation: slowDrift 18s infinite alternate ease-in-out;
 }
 
-@keyframes slowFloat {
-  from { transform:translateY(-40px); }
-  to { transform:translateY(40px); }
+@keyframes slowDrift {
+  from { transform:translateY(-60px); }
+  to   { transform:translateY(60px); }
 }
 
-/* ===== IMAGE FRAME (UNIVERSAL) ===== */
+/* ===== IMAGE FRAME (GLOBAL) ===== */
 .frame {
-  aspect-ratio:16/10;
-  background:linear-gradient(180deg,#0f172a,#020617);
-  border-radius:20px;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#020617;
+  border-radius:26px;
   border:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.9),
+    0 30px 80px rgba(0,0,0,.6);
 }
 
 .frame img {
   width:100%;
   height:100%;
   object-fit:contain;
-  padding:18px;
+  padding:6px;
 }
 
-/* ===== SWIPER ===== */
-.swiper {
-  width:100%;
-  padding:80px 0;
-}
-
-.swiper-slide {
-  transform:scale(0.8);
-  transition:transform .4s ease;
-}
-
-.swiper-slide-active {
-  transform:scale(1);
-}
-
-/* HERO GLOW */
+/* ===== HERO FRAME ===== */
 .hero .frame {
-  box-shadow:0 0 80px rgba(56,189,248,.3);
+  aspect-ratio:16/8;
+  box-shadow:
+    0 0 120px rgba(56,189,248,.35),
+    inset 0 0 80px rgba(0,0,0,.9);
 }
 
-/* ===== BUILD GRID ===== */
-.build-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:26px;
-}
-
-.build-grid .frame {
-  opacity:0;
-  transform:translateY(40px) scale(.85);
-}
-
-/* ===== FLOATING MOTION ===== */
+/* ===== FLOAT MOTION ===== */
 .float {
   animation: floatIdle 6s ease-in-out infinite;
 }
 
 @keyframes floatIdle {
   0%,100% { transform:translateY(0); }
-  50% { transform:translateY(-14px); }
+  50% { transform:translateY(-20px); }
 }
 
-/* ===== BLADE SLASH ===== */
-.slash {
-  clip-path:polygon(0 50%,100% 50%,100% 52%,0 52%);
+/* ===== SWIPER ===== */
+.swiper {
+  width:100%;
+  padding:90px 0;
+}
+
+.swiper-slide {
+  transition:transform .5s ease, opacity .5s ease;
+  opacity:.45;
+  transform:scale(.75);
+}
+
+.swiper-slide-active {
+  opacity:1;
+  transform:scale(1);
+}
+
+/* ===== BUILD GRID ===== */
+.build-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:36px;
+}
+
+.build-grid .frame {
+  opacity:0;
+  transform:translateY(60px) scale(.85);
+}
+
+/* ===== BUTTON ===== */
+button {
+  background:#020617;
+  border:1px solid #000;
+  color:var(--text);
+  padding:14px 22px;
+  border-radius:14px;
+  cursor:pointer;
+}
+
+button:hover {
+  color:white;
+  border-color:var(--accent);
 }
 </style>
 
@@ -166,7 +189,7 @@ p { max-width:700px; }
 <section id="mobs">
   <h2>◈ Mob & Boss Designs</h2>
 
-  <div class="frame float" style="max-width:700px">
+  <div class="frame hero float" style="max-width:900px;margin:auto;">
     <img id="mobHero" src="images/mobs/Muzan.jpg">
   </div>
 </section>
@@ -188,10 +211,15 @@ p { max-width:700px; }
 
   <div class="swiper bikeSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><div class="frame float"><img src="images/bikes/enduro.webp"></div></div>
+
+      <div class="swiper-slide hero">
+        <div class="frame float"><img src="images/bikes/enduro.webp"></div>
+      </div>
+
       <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwblack.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwred.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/bikes/gsxblue.png"></div></div>
+
     </div>
   </div>
 </section>
@@ -200,7 +228,7 @@ p { max-width:700px; }
 <section id="blades">
   <h2>⟁ Blades</h2>
 
-  <div class="frame slash" style="max-width:700px">
+  <div class="frame hero float" style="max-width:900px;margin:auto;">
     <img src="images/blades/Dagger.webp">
   </div>
 </section>
@@ -208,24 +236,44 @@ p { max-width:700px; }
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <h2>Get In Touch</h2>
-  <button onclick="navigator.clipboard.writeText('your@email.com')">Copy Email</button>
+  <button onclick="navigator.clipboard.writeText('your@email.com')">
+    Copy Email
+  </button>
 </section>
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
 /* ABOUT */
-gsap.from("#about h1", { y:120, opacity:0, duration:1.5 });
+gsap.from("#about h1", {
+  y:140,
+  opacity:0,
+  duration:1.6,
+  ease:"power3.out"
+});
 
 /* SWIPERS */
-new Swiper(".cubedSwiper", { slidesPerView:3, centeredSlides:true, loop:true });
-new Swiper(".bikeSwiper", { slidesPerView:2, centeredSlides:true, loop:true });
+new Swiper(".cubedSwiper", {
+  slidesPerView:2.2,
+  centeredSlides:true,
+  loop:true,
+  spaceBetween:50
+});
 
-/* MOB */
+new Swiper(".bikeSwiper", {
+  slidesPerView:2,
+  centeredSlides:true,
+  loop:true,
+  spaceBetween:50
+});
+
+/* MOB HERO */
 gsap.from("#mobHero", {
-  scale:.4,
-  rotate:-8,
+  scale:.5,
+  rotate:-10,
   opacity:0,
+  duration:1.2,
+  ease:"power3.out",
   scrollTrigger:{ trigger:"#mobs", start:"top 70%" }
 });
 
@@ -234,14 +282,8 @@ gsap.to(".build-grid .frame", {
   opacity:1,
   y:0,
   scale:1,
-  stagger:.2,
+  stagger:.25,
+  ease:"power3.out",
   scrollTrigger:{ trigger:"#buildings", start:"top 70%" }
-});
-
-/* BLADE SLASH */
-gsap.to(".slash", {
-  clipPath:"polygon(0 0,100% 0,100% 100%,0 100%)",
-  duration:1,
-  scrollTrigger:{ trigger:"#blades", start:"top 75%" }
 });
 </script>

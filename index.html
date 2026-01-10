@@ -2,197 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pencisas — 3D Game Artist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ================= FONTS ================= -->
+<!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
-<!-- ================= LIBRARIES ================= -->
+<!-- LIBRARIES -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<style>
-/* =====================================================
-   GLOBAL THEME
-===================================================== */
-:root{
-  --bg:#0B0F14;
-  --panel:#0f172a;
-  --border:#020617;
-  --text:#9CA3AF;
-  --accent:#38BDF8;
-}
-
-*{
-  box-sizing:border-box;
-  font-family:Inter,sans-serif;
-}
-
-html,body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  scroll-behavior:smooth;
-}
-
-section{
-  position:relative;
-  padding:120px 10%;
-  overflow:hidden;
-  border-bottom:1px solid var(--border);
-}
-
-h1,h2{
-  color:white;
-  font-weight:900;
-  letter-spacing:-0.04em;
-}
-
-p{
-  max-width:720px;
-  line-height:1.6;
-}
-
-/* =====================================================
-   UNIVERSAL FRAME
-===================================================== */
-.frame{
-  background:linear-gradient(180deg,#0f172a,#020617);
-  border-radius:22px;
-  border:1px solid #000;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.frame img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  padding:22px;
-}
-
-/* =====================================================
-   FLOATING MOTION
-===================================================== */
-.float{
-  animation:floatIdle 6s ease-in-out infinite;
-}
-@keyframes floatIdle{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-14px)}
-}
-
-/* =====================================================
-   ABOUT (SHORT, CINEMATIC)
-===================================================== */
-#about{
-  min-height:60vh;
-}
-
-.about-glow{
-  position:absolute;
-  inset:-50%;
-  background:radial-gradient(circle,var(--accent),transparent 70%);
-  opacity:.08;
-  filter:blur(160px);
-}
-
-/* =====================================================
-   SWIPER
-===================================================== */
-.swiper{
-  padding:90px 0;
-}
-
-.swiper-slide{
-  transform:scale(.85);
-  transition:.4s;
-}
-
-.swiper-slide-active{
-  transform:scale(1);
-}
-
-.hero .frame{
-  box-shadow:0 0 90px rgba(56,189,248,.35);
-}
-
-/* =====================================================
-   BUILDINGS
-===================================================== */
-.build-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:28px;
-}
-
-.build-grid .frame{
-  opacity:0;
-  transform:translateY(60px) scale(.85);
-}
-
-/* =====================================================
-   BLADES
-===================================================== */
-.blade-stack{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
-
-.blade-stack .frame{
-  opacity:0;
-  transform:rotate(-12deg) scale(.6);
-}
-
-/* =====================================================
-   CONTACT
-===================================================== */
-#contact{
-  text-align:center;
-}
-button{
-  background:var(--accent);
-  border:none;
-  padding:14px 28px;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-}
-</style>
+<!-- STYLES -->
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<!-- ================= ABOUT ================= -->
 <section id="about">
-  <div class="about-glow"></div>
+  <div class="ambient-glow"></div>
   <h1>3D Modeler for Game Worlds</h1>
   <p>
     Low–mid poly Roblox specialist.<br>
-    Blender & Substance Painter workflow.<br>
-    Credits include Mow ur Snow & Shatter Isles.
+    Blender & Substance Painter pipeline.<br>
+    Games: Mow ur Snow, Shatter Isles.
   </p>
 </section>
 
-<!-- ================= CUBED ================= -->
 <section id="cubed">
   <h2>▣ 3D Cubed Characters</h2>
   <div class="swiper cubedSwiper">
     <div class="swiper-wrapper">
-
-      <div class="swiper-slide hero">
-        <div class="frame float"><img src="images/cubed/SJW.jpg"></div>
-      </div>
-
+      <div class="swiper-slide hero"><div class="frame"><img src="images/cubed/SJW.jpg"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/cubed/Akaza.jpg"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyokko.jpg"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/cubed/Gyomei.jpg"></div></div>
@@ -201,27 +45,22 @@ button{
       <div class="swiper-slide"><div class="frame"><img src="images/cubed/Glacgon.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/cubed/Wolves.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/cubed/krakenfinish.png"></div></div>
-
     </div>
   </div>
 </section>
 
-<!-- ================= MOBS ================= -->
 <section id="mobs">
   <h2>◈ Mob & Boss Designs</h2>
-
-  <div class="frame float" style="max-width:860px;margin-bottom:40px">
-    <img id="mobHero" src="images/mobs/ElyenRender.png">
+  <div class="mob-hero frame">
+    <img src="images/mobs/ElyenRender.png">
   </div>
-
-  <div class="build-grid">
+  <div class="mob-grid">
     <div class="frame"><img src="images/mobs/Ants.jpg"></div>
     <div class="frame"><img src="images/mobs/Gedo.jpg"></div>
     <div class="frame"><img src="images/mobs/Muzan.jpg"></div>
   </div>
 </section>
 
-<!-- ================= BUILDINGS ================= -->
 <section id="buildings">
   <h2>▦ Building Assets</h2>
   <div class="build-grid">
@@ -231,12 +70,11 @@ button{
   </div>
 </section>
 
-<!-- ================= BIKES ================= -->
 <section id="bikes">
   <h2>▧ Motorcycles</h2>
   <div class="swiper bikeSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><div class="frame float"><img src="images/bikes/gsxblue.png"></div></div>
+      <div class="swiper-slide hero"><div class="frame"><img src="images/bikes/gsxblue.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwblack.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/bikes/bmwred.png"></div></div>
       <div class="swiper-slide"><div class="frame"><img src="images/bikes/enduro.webp"></div></div>
@@ -244,10 +82,9 @@ button{
   </div>
 </section>
 
-<!-- ================= BLADES ================= -->
 <section id="blades">
   <h2>⟁ Blades</h2>
-  <div class="blade-stack">
+  <div class="blade-grid">
     <div class="frame"><img src="images/blades/Dagger.webp"></div>
     <div class="frame"><img src="images/blades/crescentrender.png"></div>
     <div class="frame"><img src="images/blades/renderprep.png"></div>
@@ -255,37 +92,13 @@ button{
   </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
 <section id="contact">
   <h2>Get In Touch</h2>
-  <button onclick="navigator.clipboard.writeText('your@email.com')">Copy Email</button>
+  <button onclick="navigator.clipboard.writeText('your@email.com')">
+    Copy Email
+  </button>
 </section>
 
-<script>
-gsap.registerPlugin(ScrollTrigger);
-
-/* ABOUT */
-gsap.from("#about h1",{y:80,opacity:0,duration:1.4});
-
-/* SWIPERS */
-new Swiper(".cubedSwiper",{slidesPerView:3,centeredSlides:true,loop:true});
-new Swiper(".bikeSwiper",{slidesPerView:2,centeredSlides:true,loop:true});
-
-/* MOBS */
-gsap.from("#mobHero",{scale:.5,opacity:0,rotate:-6,
-  scrollTrigger:{trigger:"#mobs",start:"top 70%"}
-});
-
-/* BUILDINGS */
-gsap.to(".build-grid .frame",{opacity:1,y:0,scale:1,stagger:.2,
-  scrollTrigger:{trigger:"#buildings",start:"top 70%"}
-});
-
-/* BLADES */
-gsap.to(".blade-stack .frame",{opacity:1,scale:1,rotate:0,stagger:.15,
-  scrollTrigger:{trigger:"#blades",start:"top 70%"}
-});
-</script>
-
+<script src="js/motion.js"></script>
 </body>
 </html>

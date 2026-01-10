@@ -114,10 +114,15 @@ p { max-width:700px; }
 
   <div class="swiper cubedSwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide hero"><img src="CUBE_HERO.png"></div>
-      <div class="swiper-slide"><img src="CUBE_1.png"></div>
-      <div class="swiper-slide"><img src="CUBE_2.png"></div>
-      <div class="swiper-slide"><img src="CUBE_3.png"></div>
+      <div class="swiper-slide hero"><img src="images/mobs/SJW.jpg">
+      <div class="swiper-slide"><img src="images/mobs/Akaza.png">
+      <div class="swiper-slide"><img src="images/mobs/Gyokko.jpg">
+      <div class="swiper-slide"><img src="images/mobs/Gyomei.jpg">
+      <div class="swiper-slide"><img src="images/mobs/Kokushibo.jpg">
+      <div class="swiper-slide"><img src="images/mobs/Nezuko.jpg">
+      <div class="swiper-slide"><img src="images/mobs/Glacgon.jpg">
+      <div class="swiper-slide"><img src="images/mobs/Wolves.png">
+      <div class="swiper-slide"><img src="images/mobs/krakenfinish.png">
     </div>
   </div>
 </section>
